@@ -1,16 +1,21 @@
 Formula Parser for Dart
 =======================
+A dart plugin to to parse and evaluate mathematical expressions.
 
 [![GitHub Issues](https://img.shields.io/github/issues/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/issues)
 [![GitHub Forks](https://img.shields.io/github/forks/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/network)
 [![GitHub Stars](https://img.shields.io/github/stars/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/stargazers)
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/sriram10/formula-parser-dart/main/LICENSE)
 
+
 Formula Parser is a Dart library that allows you to parse and evaluate mathematical expressions.
 The grammar for this library is built using [petitparser](https://pub.dev/packages/petitparser) library.
 
-## Installation
+This library is open source, stable and well tested. Development happens on GitHub. Feel free to report issues or create a pull-request there.
 
+The package is hosted on dart packages. Up-to-date API documentation is created with every release.
+
+## Installation
 To use Formula Parser in your Dart project, add the following dependency to your `pubspec.yaml` file:
 ```yaml
 dependencies: 
@@ -24,7 +29,6 @@ dart pub add formula_parser
 ```
 
 ## Usage
-
 Import the package in your Dart file:
 ```dart
 import 'package:formulaparser/formulaparser.dart';
@@ -55,13 +59,11 @@ TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
 
 ## Features
-
 - Parses and evaluates mathematical expressions.
 - Supports variables and functions in the expressions.
 - Handles error cases and provides error messages.
 
 ## Supported Math Functions
-
 The following math functions are supported by the Formula Parser:
 
 | Function  | Description                                | Example                       |
@@ -102,7 +104,6 @@ The following comparison functions are supported by the Formula Parser:
 | LTE       | Greater Than or Equal To                   | `GTE(2,3)`                    |
 
 ## Supported Operators
-
 The following operators are supported by the Formula Parser:
 
 | Operator | Description               | Example              |
