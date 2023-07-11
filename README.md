@@ -13,6 +13,11 @@ and the Flutter guide for
 Formula Parser for Dart
 =======================
 
+[![GitHub Issues](https://img.shields.io/github/issues/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/issues)
+[![GitHub Forks](https://img.shields.io/github/forks/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/network)
+[![GitHub Stars](https://img.shields.io/github/stars/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/stargazers)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/sriram10/formula-parser-dart/main/LICENSE)
+
 Formula Parser is a Dart library that allows you to parse and evaluate mathematical expressions.
 The grammar for this library is built using [petitparser](https://pub.dev/packages/petitparser) library.
 
@@ -164,7 +169,7 @@ Parses the expression and returns the result.
 
 ## Contributing
 
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/your-repo).
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/sriram10/formula-parser-dart).
 
 ## License
 
