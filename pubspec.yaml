@@ -1,0 +1,14 @@
+name: formula_parser
+description: A parsing library to parse formulas and evaluate like we use in excel or spreadsheets.
+version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies: 
+  petitparser: ^5.0.0
+
+dev_dependencies:
+  lints: ^1.0.0
+  test: ^1.16.0
