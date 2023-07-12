@@ -18,7 +18,9 @@ dynamic _createFunction(left, value, right) {
     /// eg. [1, 2, 3]
     /// To handle math functions with more than one argument
     /// Eg., ADD, MUL, DIVI, AVG, POWER
-    if (value.runtimeType == List) {
+    /// value is List<Object?> - check is for petitparser 4.4.0
+    /// where in petitparser 5.x it is List<dynamic>
+    if (value.runtimeType == List || value is List<Object?>) {
       // Convert value to a list of numbers
       List v = value
           .toString()
@@ -67,39 +69,38 @@ final parser = () {
 
   builder.group()
     ..prefix(char('+').trim(), (op, a) => a)
-    ..prefix(char('-').trim(), (op, a) => -a);
+    ..prefix(char('-').trim(), (op, a) {
+      return -1 * (a as num);
+    })
+    ..postfix(string('false').trim(), (op, a) => false)
+    ..postfix(string('true').trim(), (op, a) => false);
 
   /// Rule gets applied in this order
   /// 1. First apply in this order ^, *, /, +, -
   /// 2. check comparison operators <=, >=, ==, !=, <, >
   /// 3. Apply negation operator !
-  builder
-      .group()
-      .left(char('^').trim(), (a, op, b) => mathFunction('POWER', [a, b]));
+  builder.group().left(char('^').trim(),
+      (a, op, b) => mathFunction('POWER', [a as num, b as num]));
 
   builder.group()
-    ..left(char('*').trim(), (a, op, b) => mathFunction('MUL', [a, b]))
-    ..left(char('/').trim(), (a, op, b) => mathFunction('DIVI', [a, b]));
+    ..left(char('*').trim(),
+        (a, op, b) => mathFunction('MUL', [a as num, b as num]))
+    ..left(char('/').trim(),
+        (a, op, b) => mathFunction('DIVI', [a as num, b as num]));
 
   builder.group()
-    ..left(char('+').trim(), (a, op, b) => mathFunction('ADD', [a, b]))
-    ..left(char('-').trim(), (a, op, b) => mathFunction('SUB', [a, b]));
-
-  builder.group()
-    ..left(char('<').seq(char('=')).trim(),
-        (a, op, b) => mathFunction('LTE', [a, b]))
-    ..left(string('>=').trim(), (a, op, b) => mathFunction('GTE', [a, b]))
-    ..left(string('==').trim(), (a, op, b) => mathFunction('EQ', [a, b]))
-    ..left(string('!=').trim(), (a, op, b) => mathFunction('NE', [a, b]))
-    ..left(char('<').trim(), (a, op, b) => mathFunction('LT', [a, b]))
-    ..left(char('>').trim(), (a, op, b) => mathFunction('GT', [a, b]));
+    ..left(char('+').trim(),
+        (a, op, b) => mathFunction('ADD', [a as num, b as num]))
+    ..left(char('-').trim(),
+        (a, op, b) => mathFunction('SUB', [a as num, b as num]));
 
   /// TODO: fix this to support ! operator
   /// this might fail in few scenarios and yet to be tested thoroughly
   builder.group().prefix(char('!').trim(), (op, a) {
     print(a.runtimeType);
     if (a.runtimeType == bool) {
-      return !a;
+      print(a.toString().toLowerCase());
+      return !(a as bool);
     } else {
       print(a.toString().toLowerCase());
       if (['false', '0', '0.0', 'null', 'Null']
@@ -109,6 +110,20 @@ final parser = () {
       return false;
     }
   });
+
+  builder.group()
+    ..left(char('<').seq(char('=')).trim(),
+        (a, op, b) => mathFunction('LTE', [a as num, b as num]))
+    ..left(string('>=').trim(),
+        (a, op, b) => mathFunction('GTE', [a as num, b as num]))
+    ..left(string('==').trim(),
+        (a, op, b) => mathFunction('EQ', [a as num, b as num]))
+    ..left(string('!=').trim(),
+        (a, op, b) => mathFunction('NE', [a as num, b as num]))
+    ..left(char('<').trim(),
+        (a, op, b) => mathFunction('LT', [a as num, b as num]))
+    ..left(char('>').trim(),
+        (a, op, b) => mathFunction('GT', [a as num, b as num]));
 
   builder.group().left(char(',').trim(), (a, op, b) => [a, b]);
 
