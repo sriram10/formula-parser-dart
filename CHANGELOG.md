@@ -1,3 +1,5 @@
+## 1.1.0
+ - Fixed issues in comparison operators and negation operator
 ## 1.0.0
 
 - Initial version.

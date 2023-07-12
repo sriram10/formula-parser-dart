@@ -69,29 +69,10 @@ final parser = () {
     ..prefix(char('+').trim(), (op, a) => a)
     ..prefix(char('-').trim(), (op, a) => -a);
 
-  // TODO: fix this to support ! operator
-  builder.group().prefix(char('!').trim(), (op, a) {
-    print(a.runtimeType);
-    if (a.runtimeType == bool) {
-      return !a;
-    } else {
-      print(a.toString().toLowerCase());
-      if (['false', '0', '0.0', 'null'].contains(a.toString().toLowerCase())) {
-        return false;
-      }
-      return true;
-    }
-  });
-
-  builder.group()
-    ..left(char('<').trim(), (a, op, b) => mathFunction('LT', [a, b]))
-    ..left(char('>').trim(), (a, op, b) => mathFunction('GT', [a, b]));
-  builder.group()
-    ..left(string('>=').trim(), (a, op, b) => mathFunction('LTE', [a, b]))
-    ..left(string('>=').trim(), (a, op, b) => mathFunction('GTE', [a, b]))
-    ..left(string('==').trim(), (a, op, b) => mathFunction('EQ', [a, b]))
-    ..left(string('!=').trim(), (a, op, b) => mathFunction('NE', [a, b]));
-
+  /// Rule gets applied in this order
+  /// 1. First apply in this order ^, *, /, +, -
+  /// 2. check comparison operators <=, >=, ==, !=, <, >
+  /// 3. Apply negation operator !
   builder
       .group()
       .left(char('^').trim(), (a, op, b) => mathFunction('POWER', [a, b]));
@@ -103,6 +84,31 @@ final parser = () {
   builder.group()
     ..left(char('+').trim(), (a, op, b) => mathFunction('ADD', [a, b]))
     ..left(char('-').trim(), (a, op, b) => mathFunction('SUB', [a, b]));
+
+  builder.group()
+    ..left(char('<').seq(char('=')).trim(),
+        (a, op, b) => mathFunction('LTE', [a, b]))
+    ..left(string('>=').trim(), (a, op, b) => mathFunction('GTE', [a, b]))
+    ..left(string('==').trim(), (a, op, b) => mathFunction('EQ', [a, b]))
+    ..left(string('!=').trim(), (a, op, b) => mathFunction('NE', [a, b]))
+    ..left(char('<').trim(), (a, op, b) => mathFunction('LT', [a, b]))
+    ..left(char('>').trim(), (a, op, b) => mathFunction('GT', [a, b]));
+
+  /// TODO: fix this to support ! operator
+  /// this might fail in few scenarios and yet to be tested thoroughly
+  builder.group().prefix(char('!').trim(), (op, a) {
+    print(a.runtimeType);
+    if (a.runtimeType == bool) {
+      return !a;
+    } else {
+      print(a.toString().toLowerCase());
+      if (['false', '0', '0.0', 'null', 'Null']
+          .contains(a.toString().toLowerCase())) {
+        return true; // return the opposite
+      }
+      return false;
+    }
+  });
 
   builder.group().left(char(',').trim(), (a, op, b) => [a, b]);
 

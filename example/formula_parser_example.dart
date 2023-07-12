@@ -2,7 +2,7 @@ import 'package:formula_parser/formula_parser.dart';
 
 void main() {
   // Create a FormulaParser instance with the expression and variables
-  var exp = FormulaParser('a+b+324>=20', {'a': 10, 'b': 20, 'add': 30});
+  var exp = FormulaParser('a*b+324', {'a': 10, 'b': 20});
 
   // Expression can be a complex one like below as well.
   // This works too!

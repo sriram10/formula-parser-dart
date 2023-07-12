@@ -20,7 +20,7 @@ The package is hosted on dart packages. Up-to-date API documentation is created 
 To use Formula Parser in your Dart project, add the following dependency to your `pubspec.yaml` file:
 ```yaml
 dependencies: 
-  formula_parser: ^1.0.0
+  formula_parser: ^1.0.1
 ```
 Then, run `flutter packages get`
 
