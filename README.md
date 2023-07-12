@@ -2,6 +2,7 @@ Formula Parser for Dart
 =======================
 A dart plugin to to parse and evaluate mathematical expressions.
 
+[![Pub Package](https://img.shields.io/pub/v/formula_parser.svg)](https://pub.dev/packages/formula_parser)
 [![GitHub Issues](https://img.shields.io/github/issues/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/issues)
 [![GitHub Forks](https://img.shields.io/github/forks/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/network)
 [![GitHub Stars](https://img.shields.io/github/stars/sriram10/formula-parser-dart.svg)](https://github.com/sriram10/formula-parser-dart/stargazers)
@@ -54,9 +55,6 @@ if (result.isSuccess) {
   print(result.message);
 }
 ```
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
 
 ## Features
 - Parses and evaluates mathematical expressions.
