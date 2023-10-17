@@ -1,14 +1,14 @@
 name: formula_parser
 description: A parsing library to parse formulas and evaluate like we use in excel or spreadsheets.
-version: 1.1.1
+version: 2.0.0
 repository: "https://github.com/sriram10/formula-parser-dart"
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=3.0.3 <4.0.0"
 
-dependencies: 
-  petitparser: ^4.4.0
+dependencies:
+  petitparser: ^6.0.1
 
 dev_dependencies:
-  lints: ^1.0.0
-  test: ^1.16.0
+  lints: ^2.1.1
+  test: ^1.24.8

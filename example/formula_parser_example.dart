@@ -16,14 +16,15 @@ void main() {
     print('Expression: ${exp.parsedExpression}');
     // Parse the expression
     var result = exp.parse;
+    print(result);
 
-    if (result.isSuccess) {
-      print('Result: ${result.value}');
+    if (result['isSuccess']) {
+      print('Result: ${result['value']}');
     } else {
       // Print the error information if parsing fails
-      print(result.isFailure);
-      print(result.position);
-      print(result.message);
+      print(result['isFailure']);
+      print(result['position']);
+      print(result['message']);
     }
   }
 }

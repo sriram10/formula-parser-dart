@@ -10,23 +10,23 @@ void main() {
     test('expression with arithmetic operators', () {
       final exp = FormulaParser('1+2+3-5');
       final result = exp.parse;
-      expect(result.isSuccess, isTrue);
-      expect(result.value.compareTo(1) == 0, isTrue);
+      expect(result['isSuccess'], isTrue);
+      expect(result['value'].compareTo(1) == 0, isTrue);
     });
 
     test('expression with arithmetic methods', () {
       final exp = FormulaParser('ADD(1,MUL(2, 2))'); // 1+2*2=5
       final result = exp.parse;
-      expect(result.isSuccess, isTrue);
-      expect(result.value.compareTo(5) == 0, isTrue);
+      expect(result['isSuccess'], isTrue);
+      expect(result['value'].compareTo(5) == 0, isTrue);
     });
 
     test('expression with arithmetic methods and operators', () {
       final exp = FormulaParser(
           'ADD(1,MUL(2, 2))+2^2+SQRT(4)'); // 1+2*2+(2^2)+sqrt(4)=11
       final result = exp.parse;
-      expect(result.isSuccess, isTrue);
-      expect(result.value.compareTo(11) == 0, isTrue);
+      expect(result['isSuccess'], isTrue);
+      expect(result['value'].compareTo(11) == 0, isTrue);
     });
   });
 
@@ -36,16 +36,16 @@ void main() {
       // 10 + 20.5 + 5 * 4 / 10 = 32.5
       final exp = FormulaParser('a+b+5*4/a', options);
       final result = exp.parse;
-      expect(result.isSuccess, isTrue);
-      expect(result.value.compareTo(32.5) == 0, isTrue);
+      expect(result['isSuccess'], isTrue);
+      expect(result['value'].compareTo(32.5) == 0, isTrue);
     });
 
     test('expression with arithmetic methods', () {
       final exp =
           FormulaParser('ADD(a,MUL(test, x))', options); // 10+30*40=1210
       final result = exp.parse;
-      expect(result.isSuccess, isTrue);
-      expect(result.value.compareTo(1210) == 0, isTrue);
+      expect(result['isSuccess'], isTrue);
+      expect(result['value'].compareTo(1210) == 0, isTrue);
     });
 
     test('expression with arithmetic methods and operators', () {
@@ -53,8 +53,8 @@ void main() {
       final exp = FormulaParser(
           'ADD(a,MUL(b, b))+c^2+SQRT(d)', options); // 1+2*2+(2^2)+sqrt(4)=11
       final result = exp.parse;
-      expect(result.isSuccess, isTrue);
-      expect(result.value.compareTo(11) == 0, isTrue);
+      expect(result['isSuccess'], isTrue);
+      expect(result['value'].compareTo(11) == 0, isTrue);
     });
   });
 }

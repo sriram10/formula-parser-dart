@@ -1,4 +1,5 @@
 import 'package:formula_parser/src/math_functions.dart';
+import 'package:petitparser/petitparser.dart';
 import 'parser_core.dart';
 
 /// A class that parses and evaluates mathematical expressions.
@@ -33,7 +34,7 @@ class FormulaParser {
   bool get error {
     try {
       var parsedData = parser.parse(_inputExpression);
-      if (parsedData.isFailure) {
+      if (parsedData is Failure) {
         _errorMessage = parsedData.message;
         return true;
       }
@@ -60,10 +61,25 @@ class FormulaParser {
   get parse {
     try {
       var parsedData = parser.parse(_inputExpression);
-      if (parsedData.isFailure) {
+      if (parsedData is Failure) {
         _errorMessage = parsedData.message;
+
+        return {
+          'isFailure': true,
+          'isSuccess': false,
+          'message': _errorMessage,
+          'position': parsedData.position,
+          'value': null,
+        };
       }
-      return parsedData;
+
+      return {
+        'isFailure': false,
+        'isSuccess': true,
+        'message': '',
+        'position': parsedData.position,
+        'value': parsedData.value,
+      };
     } catch (e) {
       _errorMessage = 'INVALID EXPRESSION: ${e.toString()}';
       return {
