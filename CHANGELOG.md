@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Downgraded pettiparser from 6.x to 5.x
+
 ## 2.0.0
 
 - Upgraded pettiparser from 4.x to 6.x
